@@ -1,0 +1,1 @@
+# KnowDoc Core Application Package
