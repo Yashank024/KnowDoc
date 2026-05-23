@@ -1,0 +1,467 @@
+/* Viewer.module.css — premium slide-over side canvas stylesheet */
+
+.slideDrawer {
+  position:         absolute;
+  top:              0;
+  right:            0;
+  width:            440px;
+  height:           100vh;
+  background-color: var(--sidebar-bg);
+  border-left:      1px solid rgba(15, 106, 91, 0.15);
+  box-shadow:       -10px 0 40px rgba(0,0,0,0.06);
+  z-index:          100;
+  display:          flex;
+  flex-direction:   column;
+  transform:        translateX(100%);
+  transition:       transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow:         hidden;
+}
+
+.slideDrawerOpen {
+  transform: translateX(0);
+}
+
+/* ── Header ── */
+.drawerHeader {
+  padding:          20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom:    1px solid rgba(15, 106, 91, 0.08);
+  display:          flex;
+  flex-direction:   column;
+  gap:              14px;
+  flex-shrink:      0;
+}
+
+.headerTitleRow {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+}
+
+.drawerTitle {
+  font-size:      15px;
+  font-weight:    800;
+  color:          var(--premium-black);
+  letter-spacing: -0.01em;
+}
+
+.closeBtn {
+  background:     transparent;
+  border:         none;
+  cursor:         pointer;
+  color:          var(--emerald-tide);
+  padding:        6px;
+  border-radius:  8px;
+  display:        flex;
+  align-items:    center;
+  justify-content: center;
+  transition:     background-color 0.15s ease;
+}
+
+.closeBtn:hover {
+  background-color: rgba(15, 106, 91, 0.1);
+}
+
+/* ── Tabs ── */
+.tabsRow {
+  display: flex;
+  gap:     6px;
+}
+
+.tabBtn {
+  padding:          6px 12px;
+  font-size:        11.5px;
+  font-weight:      700;
+  border-radius:    8px;
+  border:           none;
+  background:       transparent;
+  cursor:           pointer;
+  color:            rgba(0,0,0,0.50);
+  transition:       all 0.15s ease;
+}
+
+.tabBtn:hover {
+  color: rgba(0,0,0,0.80);
+}
+
+.tabBtnActive {
+  background-color: var(--emerald-tide);
+  color:            var(--champagne-mist);
+  box-shadow:       0 2px 8px rgba(15, 106, 91, 0.15);
+}
+
+/* ── Body ── */
+.drawerBody {
+  flex:       1;
+  overflow-y: auto;
+  display:    flex;
+  flex-direction: column;
+}
+
+.drawerBody::-webkit-scrollbar {
+  width: 4px;
+}
+.drawerBody::-webkit-scrollbar-track {
+  background: transparent;
+}
+.drawerBody::-webkit-scrollbar-thumb {
+  background: rgba(15, 106, 91, 0.15);
+  border-radius: 4px;
+}
+
+/* ── Dividers ── */
+.divider {
+  border:    none;
+  border-top:1px solid rgba(15, 106, 91, 0.08);
+  margin:    0;
+}
+
+/* ── Active Source Card ── */
+.sourceCard {
+  margin:           20px;
+  padding:          14px 16px;
+  background-color: white;
+  border-radius:    12px;
+  border:           1px solid rgba(15, 106, 91, 0.08);
+  box-shadow:       0 2px 10px rgba(0,0,0,0.02);
+  display:          flex;
+  flex-direction:   column;
+  gap:              12px;
+}
+
+.sourceCardHeader {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+}
+
+.sourceCardTitle {
+  font-size:   13px;
+  font-weight: 700;
+  color:       var(--premium-black);
+  max-width:   180px;
+  overflow:    hidden;
+  text-overflow: ellipsis;
+  white-space:  nowrap;
+}
+
+.sourceCardStatus {
+  font-size:        9px;
+  font-weight:      800;
+  text-transform:   uppercase;
+  letter-spacing:   0.05em;
+  padding:          2px 6px;
+  background-color: rgba(15, 106, 91, 0.08);
+  color:            var(--emerald-tide);
+  border-radius:    4px;
+}
+
+.sourceDetails {
+  display:        flex;
+  flex-direction: column;
+  gap:            6px;
+}
+
+.detailRow {
+  display:         flex;
+  justify-content: space-between;
+  font-size:       11px;
+}
+
+.detailRow span {
+  color: rgba(0,0,0,0.50);
+}
+
+.detailRow strong {
+  color: var(--premium-black);
+}
+
+/* ── Open Original PDF button ── */
+.pdfOpenerBtn {
+  margin:           0 20px 20px 20px;
+  padding:          10px;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  gap:              8px;
+  font-size:        12px;
+  font-weight:      700;
+  background-color: white;
+  border:           1px solid rgba(15, 106, 91, 0.15);
+  border-radius:    8px;
+  color:            var(--premium-black);
+  cursor:           pointer;
+  transition:       all 0.15s ease;
+}
+
+.pdfOpenerBtn:hover {
+  border-color: var(--emerald-tide);
+  color:        var(--emerald-tide);
+  box-shadow:   0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* ── Tab Contents ── */
+.tabContent {
+  padding: 20px;
+}
+
+.sectionLabel {
+  font-size:      11px;
+  font-weight:    700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color:          rgba(0,0,0,0.4);
+  margin-bottom:  8px;
+  display:        block;
+}
+
+/* ── SVG OCR Canvas ── */
+.canvasWrapper {
+  display:        flex;
+  flex-direction: column;
+}
+
+.stack {
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+}
+
+.canvasCard {
+  position:         relative;
+  aspect-ratio:     1;
+  width:            100%;
+  border-radius:    12px;
+  border:           1px solid rgba(15, 106, 91, 0.1);
+  background-color: white;
+  overflow:         hidden;
+  box-shadow:       0 4px 16px rgba(0,0,0,0.02);
+}
+
+.canvasWatermark {
+  position:        absolute;
+  inset:           0;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       120px;
+  font-weight:     800;
+  opacity:         0.02;
+  transform:       rotate(-12deg);
+  pointer-events:  none;
+}
+
+.canvasSvg {
+  position:       absolute;
+  inset:          0;
+  width:          100%;
+  height:         100%;
+  pointer-events: none;
+}
+
+.polygon {
+  transition: all 0.2s ease;
+}
+
+.textLabel {
+  position:   absolute;
+  cursor:     pointer;
+  border-radius: 4px;
+  padding:    0 4px;
+  font-size:  9px;
+  font-weight: 600;
+  display:    flex;
+  align-items: center;
+  transition: all 0.15s ease;
+}
+
+.textLabelText {
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  white-space:   nowrap;
+}
+
+.canvasHint {
+  font-size:  10px;
+  color:      rgba(0,0,0,0.4);
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* ── Raw Text List ── */
+.rawList {
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+  max-height:     320px;
+  overflow-y:     auto;
+  padding-right:  4px;
+}
+
+.rawList::-webkit-scrollbar {
+  width: 4px;
+}
+.rawList::-webkit-scrollbar-track {
+  background: transparent;
+}
+.rawList::-webkit-scrollbar-thumb {
+  background: rgba(15, 106, 91, 0.15);
+  border-radius: 4px;
+}
+
+.rawItem {
+  padding:          10px 12px;
+  background-color: white;
+  border-radius:    8px;
+  border:           1px solid rgba(0,0,0,0.05);
+  cursor:           pointer;
+  display:          flex;
+  flex-direction:   column;
+  gap:              6px;
+  transition:       all 0.15s ease;
+}
+
+.rawItem:hover {
+  transform:  translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.rawItemActive {
+  border-color: var(--accent-orange);
+  box-shadow:   0 2px 10px rgba(217,91,36,0.08);
+}
+
+.rawItemText {
+  font-size:   12px;
+  font-weight: 600;
+  color:       var(--premium-black);
+}
+
+.rawItemMeta {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+}
+
+.rawBlockLabel {
+  font-size:   9px;
+  font-weight: 700;
+  color:       var(--emerald-tide);
+}
+
+.rawConfBadge {
+  font-size:     9px;
+  font-weight:   700;
+  font-family:   monospace;
+  padding:       2px 5px;
+  border-radius: 4px;
+}
+
+.rawConfHigh {
+  background-color: rgba(34, 197, 94, 0.08);
+  color:            #15803d;
+}
+
+.rawConfLow {
+  background-color: rgba(217, 91, 36, 0.08);
+  color:            var(--accent-orange);
+}
+
+/* ── Selected Metadata details drawer ── */
+.drawerDetails {
+  padding:          20px;
+  background-color: rgba(255,255,255,0.30);
+  display:          flex;
+  flex-direction:   column;
+  gap:              8px;
+  flex-shrink:      0;
+  border-top:       1px solid rgba(15, 106, 91, 0.08);
+}
+
+.drawerLabel {
+  font-size:      10px;
+  font-weight:    700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color:          rgba(0,0,0,0.4);
+}
+
+.drawerContent {
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+}
+
+.drawerText {
+  margin:           0;
+  padding:          10px 12px;
+  background-color: white;
+  border-left:      3px solid var(--accent-orange);
+  border-radius:    4px;
+  font-size:        12.5px;
+  font-weight:      600;
+  line-height:      1.4;
+  color:            var(--premium-black);
+}
+
+.drawerStats {
+  display: flex;
+  gap:     10px;
+}
+
+.drawerBadge {
+  font-size:        10px;
+  padding:          3px 8px;
+  background-color: rgba(255,255,255,0.7);
+  border:           1px solid rgba(15, 106, 91, 0.1);
+  border-radius:    6px;
+  display:          flex;
+  gap:              4px;
+}
+
+.statKey {
+  color: rgba(0,0,0,0.5);
+}
+
+.statVal {
+  color: var(--premium-black);
+}
+
+.drawerEmptyState {
+  font-size:  11px;
+  font-style: italic;
+  color:      rgba(0,0,0,0.4);
+}
+
+/* ── Empty drawer container ── */
+.drawerEmptyContainer {
+  flex:            1;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  text-align:      center;
+  padding:         30px;
+}
+
+.emptyIcon {
+  width:        40px;
+  height:       40px;
+  color:        var(--emerald-tide);
+  opacity:      0.3;
+  margin-bottom:12px;
+}
+
+.emptyLabel {
+  font-size:   13px;
+  font-weight: 700;
+  color:       var(--premium-black);
+}
+
+.emptySubtitle {
+  font-size:   11.5px;
+  line-height: 1.5;
+  color:       rgba(0,0,0,0.45);
+  margin-top:  4px;
+  max-width:   240px;
+}

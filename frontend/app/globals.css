@@ -1,0 +1,33 @@
+/* ═══════════════════════════════════════════════════════════════════
+   globals.css — ENTRY POINT ONLY.
+   Import order is critical:
+   1. reset      → clean slate
+   2. variables  → :root tokens available everywhere
+   3. typography → body/heading styles that use tokens
+   4. spacing    → layout utilities
+   5. animations → @keyframes
+   6. utilities  → glass-panel, citation-badge, etc.
+═══════════════════════════════════════════════════════════════════ */
+
+@import "tailwindcss";
+@import "../styles/reset.css";
+@import "../styles/variables.css";
+@import "../styles/typography.css";
+@import "../styles/spacing.css";
+@import "../styles/animations.css";
+@import "../styles/utilities.css";
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background:    rgba(15, 106, 91, 0.20);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--emerald-tide); }
+
+/* ── Body background ── */
+body {
+  background-color: var(--background);
+  overflow-x:       hidden;
+}

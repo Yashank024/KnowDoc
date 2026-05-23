@@ -1,0 +1,12 @@
+/* ═══════════════════════════════════════════════════
+   Container.module.css
+   Single source of truth for horizontal layout.
+   DO NOT add padding-block here — that belongs in Section.
+═══════════════════════════════════════════════════ */
+
+.container {
+  width:          100%;
+  max-width:      var(--container-max);   /* 1400px */
+  margin-inline:  auto;
+  padding-inline: var(--container-px);   /* 32px  */
+}

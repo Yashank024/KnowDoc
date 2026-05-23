@@ -1,0 +1,721 @@
+/* Chat.module.css — chat layout coordinate parameters */
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--champagne-mist);
+  padding: 20px;
+  position: relative;
+  min-width: 0;
+}
+
+/* ── Top Header Bar ── */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(15, 106, 91, 0.02);
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.folderContext {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topBarFolderIcon {
+  color: var(--emerald-tide);
+}
+
+.topBarLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--premium-black);
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.uploadBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: var(--emerald-tide);
+  color: var(--champagne-mist);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 106, 91, 0.1);
+  transition: all 0.15s ease;
+}
+
+.uploadBtn:hover {
+  background-color: #0b5145;
+  transform: translateY(-0.5px);
+  box-shadow: 0 4px 12px rgba(15, 106, 91, 0.2);
+}
+
+.topBarStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.statusText {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* ── Thread list of messages ── */
+.messageList {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Scrollbar styling */
+.messageList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.messageList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messageList::-webkit-scrollbar-thumb {
+  background: rgba(15, 106, 91, 0.1);
+  border-radius: 4px;
+}
+
+/* ── Message Bubble ── */
+.bubbleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  max-width: 75%;
+}
+
+.bubbleWrapperUser {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.senderTag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(15, 106, 91, 0.6);
+  padding-left: 4px;
+}
+
+.bubbleWrapperUser .senderTag {
+  color: rgba(0, 0, 0, 0.4);
+  padding-right: 4px;
+}
+
+.bubble {
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.bubbleAi {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--premium-black);
+  border-top-left-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.01);
+}
+
+.bubbleUser {
+  background-color: var(--emerald-tide);
+  color: var(--champagne-mist);
+  border-top-right-radius: 4px;
+  box-shadow: 0 4px 16px rgba(15, 106, 91, 0.1);
+}
+
+.messagePara {
+  margin: 0;
+}
+
+.messagePara+.messagePara {
+  margin-top: 10px;
+}
+
+.boldText {
+  font-weight: 700;
+}
+
+/* ── Academic Superscript Citations ── */
+.superscriptCitation {
+  display: inline-block;
+  cursor: pointer;
+  color: var(--accent-orange);
+  font-weight: 700;
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: 11px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.superscriptCitation:hover {
+  color: #c2410c;
+  transform: scale(1.15) translateY(-1px);
+}
+
+/* ── Claude-Inspired Sources Block ── */
+.sourcesContainer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(15, 106, 91, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sourcesHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(15, 106, 91, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sourcesIcon {
+  color: rgba(15, 106, 91, 0.6);
+  flex-shrink: 0;
+}
+
+.sourcesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sourceCard {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(15, 106, 91, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  color: var(--premium-black);
+}
+
+.sourceCard:hover {
+  background-color: white;
+  border-color: var(--accent-orange);
+  box-shadow: 0 4px 12px rgba(217, 91, 36, 0.08);
+  transform: translateY(-1.5px);
+}
+
+.sourceBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(217, 91, 36, 0.1);
+  color: var(--accent-orange);
+  font-weight: 700;
+  font-size: 10px;
+  transition: all 0.2s ease;
+}
+
+.sourceCard:hover .sourceBadge {
+  background-color: var(--accent-orange);
+  color: white;
+}
+
+.sourceFilename {
+  font-weight: 600;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sourcePage {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.sourceArrow {
+  color: rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  margin-left: 2px;
+  flex-shrink: 0;
+}
+
+.sourceCard:hover .sourceArrow {
+  color: var(--accent-orange);
+  transform: translate(1px, -1px);
+}
+
+
+/* ── Input Box Wrapper ── */
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.inputForm {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 4px 8px;
+  box-shadow: 0 6px 24px rgba(15, 106, 91, 0.03);
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.inputForm:focus-within {
+  border-color: var(--emerald-tide);
+  box-shadow: 0 8px 32px rgba(15, 106, 91, 0.08);
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 14px;
+  font-size: 14px;
+  background: transparent;
+  color: var(--premium-black);
+}
+
+.sendBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.inputHint {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* ── Slide-up Upload Toast Alert ── */
+.toastUpload {
+  position: absolute;
+  bottom: 110px;
+  right: 30px;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 240px;
+  z-index: 100;
+  animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toastHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toastLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--premium-black);
+}
+
+.toastPct {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-orange);
+}
+
+.toastTrack {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.toastBar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+/* ── Thinking Dots ── */
+.thinkingDots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.thinkingDots span {
+  width: 6px;
+  height: 6px;
+  background-color: var(--emerald-tide);
+  border-radius: 50%;
+  display: inline-block;
+  animation: thinkingPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes thinkingPulse {
+
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* ── Conversational OS Welcome Cards ── */
+.welcomePanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  max-width: 560px;
+  margin: auto;
+}
+
+.welcomeIcon {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.welcomeTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--premium-black);
+  letter-spacing: -0.02em;
+}
+
+.welcomeDesc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+}
+
+.suggestionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.suggestionCard {
+  background-color: rgba(255, 255, 255, 0.50);
+  border: 1px solid var(--border-color);
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.suggestionCard:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: var(--emerald-tide);
+  box-shadow: 0 2px 8px rgba(15, 106, 91, 0.05);
+}
+
+.suggestionTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--premium-black);
+}
+
+.suggestionText {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+  margin-top: 2px;
+}
+
+/* ── Claude-Inspired Centered Empty State Stack ── */
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 680px;
+  margin: auto;
+  width: 100%;
+  gap: 24px;
+  animation: welcomeFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes welcomeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.centeredInputWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.centeredUploadStatus {
+  position: absolute;
+  top: -42px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--emerald-tide);
+  color: var(--champagne-mist);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(15, 106, 91, 0.2);
+  z-index: 10;
+  animation: toastSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.centeredUploadText {
+  letter-spacing: 0.02em;
+}
+
+.spinnerSmall {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(243, 231, 211, 0.3);
+  border-top-color: var(--champagne-mist);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Center Input Card Glassmorphic Forms ── */
+.centerInputContainer {
+  width: 100%;
+}
+
+.centerInputForm {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--input-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 16px;
+  gap: 12px;
+  box-shadow: 0 12px 36px rgba(15, 106, 91, 0.04), 0 2px 4px rgba(0, 0, 0, 0.01);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.centerInputForm:focus-within {
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 48px rgba(15, 106, 91, 0.08), 0 2px 8px rgba(15, 106, 91, 0.02);
+  background-color: rgba(255, 255, 255, 0.88);
+}
+
+.centerTextarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--premium-black);
+  font-family: inherit;
+  padding: 4px 8px;
+}
+
+.centerTextarea::placeholder {
+  color: rgba(15, 106, 91, 0.35);
+  font-weight: 500;
+}
+
+.centerInputFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid rgba(15, 106, 91, 0.06);
+}
+
+.centerFooterLeft {
+  display: flex;
+  align-items: center;
+}
+
+.centerPlusBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.6);
+  color: var(--emerald-tide);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.centerPlusBtn:hover {
+  background-color: var(--emerald-tide);
+  color: var(--champagne-mist);
+  border-color: var(--emerald-tide);
+  transform: scale(1.05);
+}
+
+.centerFooterRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modelSelectorPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(15, 106, 91, 0.05);
+  border: 1px solid rgba(15, 106, 91, 0.08);
+  color: var(--emerald-tide);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modelSelectorPill:hover {
+  background-color: rgba(15, 106, 91, 0.1);
+  border-color: rgba(15, 106, 91, 0.2);
+}
+
+.iconActionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: rgba(15, 106, 91, 0.5);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.iconActionBtn:hover {
+  color: var(--emerald-tide);
+  background-color: rgba(15, 106, 91, 0.05);
+}
+
+.centerSendBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.centerSendBtn:hover {
+  transform: scale(1.05) translateY(-0.5px);
+  box-shadow: 0 4px 12px rgba(15, 106, 91, 0.15);
+}

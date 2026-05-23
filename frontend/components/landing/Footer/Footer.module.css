@@ -1,0 +1,332 @@
+/* ═══════════════════════════════════════════════
+   Footer.module.css — Scoped styling for premium Footer.
+   Uses curated, harmonious colors, HSL gradients,
+   cream glassmorphism, and micro-animations.
+═══════════════════════════════════════════════ */
+
+.footer {
+  width: 100%;
+  position: relative;
+  background: rgba(243, 231, 211, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding-bottom: 40px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(15, 106, 91, 0.12) 15%,
+    rgba(15, 106, 91, 0.12) 85%,
+    transparent
+  );
+  margin-bottom: 60px;
+}
+
+/* ── Responsive Columns Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.4fr 1.1fr 0.9fr;
+    gap: 48px;
+  }
+}
+
+/* ── Brand Section ── */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand:hover {
+  transform: scale(1.02);
+}
+
+.logoImg {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(15, 106, 91, 0.1));
+}
+
+.titleImg {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  margin-top: 1px;
+}
+
+.brandDesc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(17, 17, 17, 0.65);
+  max-width: 320px;
+}
+
+.creditBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 106, 91, 0.06);
+  border: 1px solid rgba(15, 106, 91, 0.12);
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--emerald-tide);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.creditBadge:hover {
+  background: rgba(15, 106, 91, 0.10);
+  border-color: rgba(15, 106, 91, 0.20);
+}
+
+.pulseDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-orange);
+  box-shadow: 0 0 0 rgba(217, 91, 36, 0.4);
+  animation: pulseGlow 1.8s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(217, 91, 36, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(217, 91, 36, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(217, 91, 36, 0);
+  }
+}
+
+/* ── Developer Card (Yashank's details) ── */
+.contactCard {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(15, 106, 91, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.contactCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(15, 106, 91, 0.16);
+  box-shadow: 0 8px 30px rgba(15, 106, 91, 0.06), 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.colTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-orange);
+  margin-bottom: 16px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--emerald-tide), #14806e);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 10px rgba(15, 106, 91, 0.25);
+  transition: transform 0.25s ease;
+}
+
+.contactCard:hover .avatar {
+  transform: scale(1.06);
+}
+
+.devName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--premium-black);
+}
+
+.devTitle {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: rgba(17, 17, 17, 0.48);
+  margin-top: 1px;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(17, 17, 17, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  width: fit-content;
+}
+
+.contactItem:hover {
+  color: var(--emerald-tide);
+  transform: translateX(3px);
+}
+
+.contactIcon {
+  width: 15px;
+  height: 15px;
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+}
+
+.contactItem:hover .contactIcon {
+  opacity: 0.9;
+}
+
+/* ── Tech Tags Grid ── */
+.stackCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.techChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.chip {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(17, 17, 17, 0.72);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.chip::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  background-color: white;
+  border-color: rgba(15, 106, 91, 0.18);
+}
+
+.stackDesc {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: rgba(17, 17, 17, 0.46);
+  margin-top: 4px;
+}
+
+/* ── Bottom Bar ── */
+.bottomBar {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 106, 91, 0.06);
+}
+
+@media (min-width: 640px) {
+  .bottomBar {
+    flex-direction: row;
+    padding-top: 28px;
+  }
+}
+
+.copyright {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(17, 17, 17, 0.38);
+}
+
+.bottomLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bottomLink {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(17, 17, 17, 0.45);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.bottomLink:hover {
+  color: var(--emerald-tide);
+}
+
+.dotSeparator {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: rgba(17, 17, 17, 0.2);
+}

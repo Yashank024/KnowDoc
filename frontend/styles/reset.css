@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════════════════════
+   reset.css — extracted from globals.css.
+   Imported first so all other files build on a clean base.
+═══════════════════════════════════════════════════════ */
+
+/* Universal box-sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin:     0;
+  padding:    0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering:          optimizeLegibility;
+}
+
+/* Remove list styles for semantic lists */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Responsive images */
+img,
+video,
+svg {
+  display:   block;
+  max-width: 100%;
+}
+
+/* Remove button defaults */
+button {
+  background: none;
+  border:     none;
+  font:       inherit;
+  cursor:     pointer;
+}
+
+/* Remove anchor underline defaults */
+a {
+  color:           inherit;
+  text-decoration: none;
+}
