@@ -1,1 +1,0 @@
-# KnowDoc Services Package
