@@ -11,7 +11,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "tailwindcss";
+
 @import "../styles/reset.css";
 @import "../styles/variables.css";
 @import "../styles/typography.css";
