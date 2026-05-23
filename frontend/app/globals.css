@@ -8,7 +8,9 @@
    5. animations → @keyframes
    6. utilities  → glass-panel, citation-badge, etc.
 ═══════════════════════════════════════════════════════════════════ */
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "tailwindcss";
 @import "../styles/reset.css";
 @import "../styles/variables.css";
