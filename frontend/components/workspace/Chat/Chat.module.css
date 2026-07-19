@@ -749,4 +749,52 @@
   .welcomeDesc {
     font-size: 12px !important;
   }
+
+  /* Expand message bubble width to maximize screen estate */
+  .bubbleWrapper {
+    max-width: 92% !important;
+  }
+
+  /* Compact input form styling for single-line fit on mobile */
+  .centerInputForm {
+    padding: 10px 12px !important;
+    border-radius: 16px !important;
+  }
+
+  .centerFooterRight {
+    gap: 6px !important;
+  }
+
+  .modelSelectorPill {
+    padding: 4px 6px !important;
+    font-size: 10px !important;
+    gap: 4px !important;
+  }
+
+  .iconActionBtn {
+    padding: 4px !important;
+  }
+
+  .centerPlusBtn {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .centerSendBtn {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 8px !important;
+  }
+}
+
+/* Very small mobile screen overrides */
+@media (max-width: 480px) {
+  .suggestionsGrid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  
+  .suggestionCard {
+    padding: 10px 12px !important;
+  }
 }

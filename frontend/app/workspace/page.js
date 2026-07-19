@@ -26,6 +26,13 @@ export default function WorkspacePage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  // Helper to auto-collapse sidebar on mobile/tablet screens
+  const collapseSidebarOnMobile = () => {
+    if (typeof window !== "undefined" && window.innerWidth <= 768) {
+      setIsSidebarCollapsed(true);
+    }
+  };
+
   // Fetch document list on component mount
   useEffect(() => {
     async function loadWorkspaceData() {
@@ -210,6 +217,7 @@ You can now ask questions about the contents, or explore it inside the Visual In
           : chat
       )
     );
+    collapseSidebarOnMobile();
   }
 
   // Delete document globally from database and ChromaDB vectors
@@ -302,6 +310,7 @@ You can now ask questions about the contents, or explore it inside the Visual In
   function handleSelectDoc(doc) {
     setActiveDoc(doc);
     setIsDrawerOpen(true);
+    collapseSidebarOnMobile();
   }
 
   // Handle database reset success by wiping frontend state and spawning a fresh chat thread
@@ -332,6 +341,13 @@ You can now ask questions about the contents, or explore it inside the Visual In
       className="flex h-screen w-screen overflow-hidden"
       style={{ backgroundColor: "var(--champagne-mist)" }}
     >
+      {/* Sidebar Backdrop Overlay on Mobile */}
+      {!isSidebarCollapsed && (
+        <div
+          className="fixed inset-0 bg-black/35 backdrop-blur-xs z-[998] md:hidden cursor-pointer"
+          onClick={() => setIsSidebarCollapsed(true)}
+        />
+      )}
       {/* Mobile Sidebar Toggle Button */}
       {isSidebarCollapsed && (
         <button
@@ -364,16 +380,21 @@ You can now ask questions about the contents, or explore it inside the Visual In
         onSelectChat={(chatId) => {
           handleSetActiveChat(chatId);
           setViewMode("chat");
+          collapseSidebarOnMobile();
         }}
         onNewChat={() => {
           handleNewChat();
           setViewMode("chat");
+          collapseSidebarOnMobile();
         }}
         onRenameChat={handleRenameChat}
         onDeleteChat={handleDeleteChat}
         onShareChat={handleShareChat}
         viewMode={viewMode}
-        onViewAll={() => setViewMode("explorer")}
+        onViewAll={() => {
+          setViewMode("explorer");
+          collapseSidebarOnMobile();
+        }}
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={setIsSidebarCollapsed}
         onOpenSettings={() => setIsSettingsOpen(true)}
