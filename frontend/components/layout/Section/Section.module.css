@@ -1,0 +1,10 @@
+/* ═══════════════════════════════════════════════════
+   Section.module.css
+   Structural only. padding-block is set via JS props.
+═══════════════════════════════════════════════════ */
+
+.section {
+  width:    100%;
+  position: relative;
+  /* padding-block: controlled by Section.jsx py/pt/pb props */
+}

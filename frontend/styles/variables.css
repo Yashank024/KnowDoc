@@ -1,0 +1,29 @@
+/* ═══════════════════════════════════════════════════════════
+   variables.css — ALL design tokens for the entire project.
+   Imported first in globals.css so every file can use them.
+═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Brand colour palette ── */
+  --champagne-mist: #F3E7D3;
+  --emerald-tide:   #0F6A5B;
+  --accent-orange:  #D95B24;
+  --premium-black:  #111111;
+
+  /* ── Semantic mappings ── */
+  --background:   var(--champagne-mist);
+  --foreground:   var(--premium-black);
+  --sidebar-bg:   #EADBC8;
+  --card-bg:      rgba(255, 255, 255, 0.40);
+  --input-bg:     rgba(255, 255, 255, 0.70);
+  --border-color: rgba(15, 106, 91, 0.15);
+  --border-hover: rgba(15, 106, 91, 0.40);
+
+  /* ── Typography ── */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* ── Layout ── */
+  --container-max: 1400px;
+  --container-px:  32px;
+}

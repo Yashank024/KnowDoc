@@ -1,0 +1,68 @@
+/* ═══════════════════════════════════════════════════════
+   Features.module.css
+   padding-block → Section pt/pb props
+   max-width + padding-inline → Container
+   .wrapper holds the divider + section shell.
+═══════════════════════════════════════════════════════ */
+
+/* Outer shell — needed for the gradient divider */
+.wrapper { width: 100%; }
+
+.divider {
+  height:     1px;
+  background: linear-gradient(90deg, transparent, rgba(15,106,91,0.15) 20%, rgba(15,106,91,0.15) 80%, transparent);
+}
+
+/* ── Section label ── */
+.sectionLabel { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+.labelText    { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-orange); white-space: nowrap; }
+.labelLine    { flex: 1; height: 1px; background: rgba(15, 106, 91, 0.10); }
+
+/* ── Grid ── */
+.grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ── Card ── */
+.card {
+  position:                relative;
+  display:                 flex;
+  flex-direction:          column;
+  gap:                     16px;
+  padding:                 32px;
+  border-radius:           24px;
+  cursor:                  default;
+  background:              rgba(255, 255, 255, 0.38);
+  backdrop-filter:         blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border:                  1px solid rgba(15, 106, 91, 0.09);
+  box-shadow:              0 2px 12px rgba(0, 0, 0, 0.03);
+  transition:              transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform:    translateY(-4px);
+  box-shadow:   0 12px 32px rgba(15, 106, 91, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-color: rgba(15, 106, 91, 0.18);
+}
+
+.cardAccent {
+  position: absolute; top: 0; left: 32px; right: 32px;
+  height: 2px; border-radius: 0 0 4px 4px;
+  opacity: 0; transition: opacity 0.25s ease;
+}
+.card:hover .cardAccent { opacity: 1; }
+
+.iconBadge {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: transform 0.25s ease;
+}
+.card:hover .iconBadge { transform: scale(1.08); }
+
+.title { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--premium-black); margin-bottom: 6px; }
+.desc  { font-size: 13px; font-weight: 300; line-height: 1.65; color: rgba(17, 17, 17, 0.62); }
+
+.cardIndex { margin-top: auto; padding-top: 12px; font-size: 10px; font-family: monospace; font-weight: 700; opacity: 0.20; transition: opacity 0.25s ease; }
+.card:hover .cardIndex { opacity: 0.40; }
+
+

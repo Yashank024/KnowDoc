@@ -1,0 +1,30 @@
+/* ═══════════════════════════════════════════════════════
+   spacing.css — layout & spacing utility classes.
+   Used by components that need shared vertical rhythm.
+═══════════════════════════════════════════════════════ */
+
+/* ── Vertical stack helpers ── */
+.stack-xs  { display: flex; flex-direction: column; gap: 8px;  }
+.stack-sm  { display: flex; flex-direction: column; gap: 12px; }
+.stack-md  { display: flex; flex-direction: column; gap: 20px; }
+.stack-lg  { display: flex; flex-direction: column; gap: 32px; }
+.stack-xl  { display: flex; flex-direction: column; gap: 48px; }
+
+/* ── Inline / row helpers ── */
+.row-sm  { display: flex; align-items: center; gap: 8px;  }
+.row-md  { display: flex; align-items: center; gap: 16px; }
+.row-lg  { display: flex; align-items: center; gap: 24px; }
+
+/* ── Section padding variants ── */
+.section-padding-sm  { padding-block: 48px; }
+.section-padding-md  { padding-block: 64px; }
+.section-padding-lg  { padding-block: 80px; }
+.section-padding-xl  { padding-block: 112px; }
+
+/* ── Page padding ── */
+.page-padding { padding-inline: var(--container-px); }
+
+/* ── Text max-width limiters ── */
+.prose-sm  { max-width: 440px; }
+.prose-md  { max-width: 620px; }
+.prose-lg  { max-width: 800px; }

@@ -1,0 +1,57 @@
+/* Button.module.css — reusable button primitives */
+
+.base {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  font-weight:     500;
+  cursor:          pointer;
+  border:          none;
+  outline:         none;
+  transition:      all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.base:disabled { opacity: 0.50; cursor: not-allowed; }
+
+.primary {
+  padding:          12px 24px;
+  border-radius:    6px;
+  border:           1px solid var(--emerald-tide);
+  background-color: var(--emerald-tide);
+  color:            var(--champagne-mist);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: transparent;
+  color:            var(--emerald-tide);
+  transform:        translateY(-1px);
+  box-shadow:       0 4px 12px rgba(15, 106, 91, 0.10);
+}
+
+.primary:active:not(:disabled) { transform: translateY(0); }
+
+.secondary {
+  padding:          12px 24px;
+  border-radius:    6px;
+  border:           1px solid var(--border-color);
+  background-color: transparent;
+  color:            var(--emerald-tide);
+}
+
+.secondary:hover:not(:disabled) {
+  border-color:     var(--emerald-tide);
+  background-color: rgba(15, 106, 91, 0.05);
+  transform:        translateY(-1px);
+}
+
+.secondary:active:not(:disabled) { transform: translateY(0); }
+
+.icon {
+  padding:          8px;
+  border-radius:    6px;
+  background-color: transparent;
+  color:            var(--emerald-tide);
+}
+
+.icon:hover:not(:disabled)  { background-color: rgba(0, 0, 0, 0.05); }
+.icon:active:not(:disabled) { background-color: rgba(0, 0, 0, 0.10); }

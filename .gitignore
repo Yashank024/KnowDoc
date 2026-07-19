@@ -1,0 +1,37 @@
+# Environments
+venv/
+venv/*
+.env
+.env.*
+
+# Python bytecode caching
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Next.js / Frontend dependencies & build
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env*
+frontend/.vercel
+
+# Backend uploads, DBs & caches
+backend/app/uploads/*
+!backend/app/uploads/.gitkeep
+backend/app/vector_db/*
+!backend/app/vector_db/.gitkeep
+backend/app/db/data/*
+!backend/app/db/data/.gitkeep
+# Exclude database files containing sensitive user chats and metadata
+backend/app/db/data/chats.json
+backend/app/db/data/documents.json
+backend/app/db/data/folders.json
+backend/.env
+
+# IDE / System configuration
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

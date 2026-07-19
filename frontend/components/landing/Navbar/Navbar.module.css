@@ -1,0 +1,99 @@
+/* ═══════════════════════════════════════════════
+   Navbar.module.css — scoped styles for Navbar.
+   Horizontal alignment delegated to Container.
+═══════════════════════════════════════════════ */
+
+.header {
+  width: 100%;
+  border-bottom: 1px solid rgba(15, 106, 91, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(243, 231, 211, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Inner flex row (height + alignment only) ── */
+/* NO max-width, NO padding-inline — Container handles those */
+.inner {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logoImg {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.titleImg {
+  height: 58px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Right nav cluster ── */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.statusChip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  color: rgba(17, 17, 17, 0.60);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.statusLabel {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.docsLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--emerald-tide);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.docsLink:hover {
+  opacity: 0.70;
+}

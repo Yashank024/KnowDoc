@@ -1,0 +1,29 @@
+# Python bytecode caching
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+ENV/
+env/
+.env
+
+# Application databases & persistent storage
+app/uploads/*
+!app/uploads/.gitkeep
+app/vector_db/*
+!app/vector_db/.gitkeep
+app/db/data/*
+!app/db/data/processed/
+app/db/data/processed/*
+!app/db/data/processed/.gitkeep
+!app/db/data/.gitkeep
+# Exclude database files containing sensitive user chats and metadata
+app/db/data/chats.json
+app/db/data/documents.json
+app/db/data/folders.json
+
+# IDE configuration
+.vscode/
+.idea/

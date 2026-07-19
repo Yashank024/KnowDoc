@@ -1,0 +1,73 @@
+/* ═══════════════════════════════════════════════════════════════════
+   globals.css — ENTRY POINT ONLY.
+   Import order is critical:
+   1. reset      → clean slate
+   2. variables  → :root tokens available everywhere
+   3. typography → body/heading styles that use tokens
+   4. spacing    → layout utilities
+   5. animations → @keyframes
+   6. utilities  → glass-panel, citation-badge, etc.
+═══════════════════════════════════════════════════════════════════ */
+@import "tailwindcss";
+
+@import "../styles/reset.css";
+@import "../styles/variables.css";
+@import "../styles/typography.css";
+@import "../styles/spacing.css";
+@import "../styles/animations.css";
+@import "../styles/utilities.css";
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 106, 91, 0.20);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--emerald-tide);
+}
+
+/* ── Body background ── */
+body {
+  background-color: var(--background);
+  overflow-x: hidden;
+}
+
+/* ── Mobile Sidebar Toggle ── */
+.mobile-sidebar-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 20px;
+    top: 28px;
+    width: 44px;
+    height: 44px;
+    background-color: var(--card-bg);
+    color: var(--emerald-tide);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(15, 106, 91, 0.08);
+    z-index: 100;
+    transition: all 0.2s ease;
+  }
+  .mobile-sidebar-toggle:hover {
+    background-color: var(--champagne-mist);
+    transform: scale(1.03);
+  }
+}
