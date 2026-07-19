@@ -8,41 +8,40 @@ KnowDoc is a production-ready **RAG (Retrieval-Augmented Generation)** document 
 
 ## 🏗️ System Architecture
 
-```
+```text
 [ Next.js Frontend (Vercel) ]
           │
           ▼  POST /api/upload  (multipart)
 [ FastAPI Backend (Render) ]
           │
-          ▼
+          ├── Returns 202 Accepted & {"status": "processing"} immediately
+          │
+          ▼  [ BackgroundTask: Asynchronous Ingestion ]
 [ Stage 1: Extract Text ]
      ├── PDF with selectable text → PyMuPDF (fast, no API call)
      ├── Scanned PDF / Image     → PaddleOCR Cloud API (VL-1.6)
      ├── DOCX                    → xml.etree.ElementTree
      └── TXT                     → plain read
-
-          │  FAIL if text_lines == 0
+          │
           ▼
 [ Stage 2: Chunk Text ]
      └── 300-word chunks, 50-word overlap
-
-          │  FAIL if chunks == 0
+          │
           ▼
 [ Stage 3: Jina Embeddings ]
      └── jina-embeddings-v4 (cloud API)
-
-          │  FAIL if len(embeddings) != len(chunks)
+          │
           ▼
 [ Stage 4: ChromaDB Insert ]
      └── Upsert vectors + metadata
-
           │
           ▼
-[ Stage 5: Verify Insertion ]
-     └── collection.get(ids=[...]) — FAIL if count mismatch
+[ Stage 5: Finalize Status ]
+     └── Update documents.json → status: "completed", save text coordinates
 
-          │  HTTP 200 returned ONLY here
-          ▼
+[ Frontend Polling ]
+     └── GET /api/documents every 2s → Syncs UI when status == "completed"
+
 [ RAG Chat: POST /api/chat ]
      ├── Embed query → ChromaDB cosine search (top 5)
      ├── Build context block (max 12,000 chars)
@@ -69,27 +68,28 @@ KnowDoc is a production-ready **RAG (Retrieval-Augmented Generation)** document 
 
 | File | Role |
 |---|---|
-| [pipeline.py](backend/app/services/ingestion/pipeline.py) | **Master ingestion pipeline** — 5 validated stages, synchronous, no background tasks |
+| [pipeline.py](backend/app/services/ingestion/pipeline.py) | **Master ingestion pipeline** — 5 validated stages |
 | [paddle_service.py](backend/app/services/ocr/paddle_service.py) | PaddleOCR Cloud API wrapper — submits job, polls, downloads JSONL, extracts markdown |
 | [pdf_service.py](backend/app/services/ocr/pdf_service.py) | Two-path PDF router: PyMuPDF (selectable) → PaddleOCR (scanned) |
-| [upload_service.py](backend/app/services/storage/upload_service.py) | Validates file, saves to disk, calls pipeline, returns verified result |
+| [upload_service.py](backend/app/services/storage/upload_service.py) | Validates file, saves to disk under original name (prevents collisions), queues `BackgroundTasks`, returns immediate response |
 | [embeddings_service.py](backend/app/services/ai/embeddings_service.py) | Jina `jina-embeddings-v4` API client — bulk embedding generation |
-| [rag_pipeline.py](backend/app/services/ai/rag_pipeline.py) | ChromaDB semantic search, OpenRouter completion, citation mapping, chat memory indexing |
+| [rag_pipeline.py](backend/app/services/ai/rag_pipeline.py) | ChromaDB semantic search, OpenRouter completion, citation mapping, chat memory indexing & purging |
 | [openrouter_service.py](backend/app/services/ai/openrouter_service.py) | OpenRouter API client — lazy-loaded singleton, markdown contract prompts |
 | [chroma.py](backend/app/db/chroma.py) | ChromaDB persistent client — cosine similarity collection |
 | [metadata_store.py](backend/app/db/metadata_store.py) | Thread-safe JSON store for document metadata |
+| [main.py](backend/app/main.py) | FastAPI app entrypoint — configured with dynamic CORS regex for Vercel & local subnets |
 
 ### Backend — API Routes
 
 | Route | Method | Description |
 |---|---|---|
-| `/api/upload` | POST | Upload + ingest document (synchronous, verified) |
+| `/api/upload` | POST | Upload document, queue ingestion in background, return 202 Accepted |
 | `/api/debug-index` | POST | Full pipeline — returns all stage counts in response |
 | `/api/chat` | POST | RAG chat query |
 | `/api/chats` | GET/POST | List / create chat sessions |
-| `/api/chats/{id}` | GET/PUT/DELETE | Get / rename / delete chat |
-| `/api/documents` | GET | List all indexed documents |
-| `/api/documents/{id}` | GET/DELETE | Get / delete document + vectors |
+| `/api/chats/{id}` | GET/PUT/DELETE | Get / rename / delete chat (wipes ChromaDB memory on delete) |
+| `/api/documents` | GET | List all indexed documents (validates physical file existence) |
+| `/api/documents/{id}` | GET/DELETE | Get / delete document (physically removes disk file + vectors) |
 | `/api/health` | GET | Backend health check |
 
 ### Frontend
@@ -226,12 +226,13 @@ JINA_API_KEY=...
 
 | Decision | Rationale |
 |---|---|
-| **Synchronous pipeline** | No silent background failures — upload returns only after ChromaDB is verified |
+| **Asynchronous Background Processing** | Prevents Vercel/Render timeouts. File uploads return immediately, frontend polls for completion. |
+| **Physical File Integrity** | Deleting a document or chat physically purges the source file from disk and wipes its ChromaDB memory. Duplicate names on upload are blocked. |
+| **Dynamic CORS Regex** | Automatically handles Vercel's dynamic branch preview subdomains without manual reconfiguration. |
 | **PaddleOCR Cloud API** | Eliminates heavy local GPU/CPU model loading on Render's free tier |
 | **Jina Embeddings Cloud** | High-quality `jina-embeddings-v4` without local model storage |
 | **PyMuPDF first** | Sub-millisecond text extraction for selectable PDFs — PaddleOCR only for scanned |
-| **5-stage validation** | Each stage validates before proceeding — no pretending indexing succeeded |
-| **HTTP 422 on failure** | Frontend receives exact stage name + reason, never a fake success |
+| **HTTP 422 on failure** | Frontend receives exact stage name + reason if pipeline encounters error. |
 
 ---
 
