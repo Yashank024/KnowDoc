@@ -3,9 +3,11 @@
 import React from "react";
 import styles from "./Sidebar.module.css";
 
-export default function AccountSection({ isCollapsed }) {
+export default function AccountSection({ isCollapsed, onOpenSettings }) {
   const handleSettingsClick = () => {
-    alert("KnowDoc Workspace Configuration:\n\n- PaddleOCR Integration: http://localhost:8000/api/ocr\n- AI Embedding Scope: Folder Isolated (RAG)\n- Model: OpenRouter (Tencent Hunyuan 3)\n- Theme: Champagne Mist Premium Light");
+    if (onOpenSettings) {
+      onOpenSettings();
+    }
   };
 
   return (

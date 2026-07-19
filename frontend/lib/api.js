@@ -250,3 +250,17 @@ function logger_info(msg) {
   console.log(`[API CLIENT] ${msg}`);
 }
 
+/**
+ * Calls the backend reset-database endpoint to wipe all runtime data.
+ */
+export async function resetDatabase() {
+  const response = await fetch(`${BASE_URL}/api/admin/reset-database`, {
+    method: "POST"
+  });
+  if (!response.ok) {
+    const errPayload = await response.json().catch(() => ({}));
+    throw errPayload.detail || errPayload || { error: "Failed to reset database." };
+  }
+  return await response.json();
+}
+

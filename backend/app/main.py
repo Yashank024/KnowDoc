@@ -17,6 +17,7 @@ from app.api.routes.upload import router as upload_router
 from app.api.routes.chat import router as chat_router
 from app.api.routes.documents import router as documents_router
 from app.api.routes.folders import router as folders_router
+from app.database_reset import reset_router
 
 # Configure logging
 logging.basicConfig(
@@ -94,6 +95,7 @@ app.include_router(upload_router)
 app.include_router(chat_router)
 app.include_router(documents_router)
 app.include_router(folders_router)
+app.include_router(reset_router)
 
 @app.get("/")
 async def root():

@@ -5,6 +5,7 @@ import Sidebar     from "../../components/workspace/Sidebar/Sidebar";
 import ChatArea    from "../../components/workspace/Chat/ChatArea";
 import DocViewer   from "../../components/workspace/Viewer/DocViewer";
 import DocExplorer from "../../components/workspace/Explorer/DocExplorer";
+import SettingsModal from "../../components/workspace/SettingsModal";
 import { fetchDocuments, deleteDocument, fetchChats, createChat, deleteChat, renameChat } from "../../lib/api";
 
 export default function WorkspacePage() {
@@ -23,6 +24,7 @@ export default function WorkspacePage() {
   const [chats, setChats] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // Fetch document list on component mount
   useEffect(() => {
@@ -302,6 +304,26 @@ You can now ask questions about the contents, or explore it inside the Visual In
     setIsDrawerOpen(true);
   }
 
+  // Handle database reset success by wiping frontend state and spawning a fresh chat thread
+  async function handleResetSuccess() {
+    setDocuments([]);
+    setActiveDoc(null);
+    setIsDrawerOpen(false);
+    setSelectedCitation(null);
+    setChats([]);
+    setActiveChat(null);
+    
+    if (!sessionId) return;
+    try {
+      const newChatObj = await createChat(sessionId, "Document Chat Session #1");
+      setChats([newChatObj]);
+      handleSetActiveChat(newChatObj.id);
+      setViewMode("chat");
+    } catch (err) {
+      console.error("Failed to generate default chat session post-reset:", err);
+    }
+  }
+
   // Locate active chat message thread
   const activeChatObj = chats.find((c) => c.id === activeChat) || chats[0];
 
@@ -354,6 +376,7 @@ You can now ask questions about the contents, or explore it inside the Visual In
         onViewAll={() => setViewMode("explorer")}
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={setIsSidebarCollapsed}
+        onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
       {/* 2. Middle Immersive Area: Chat Mode or Document Explorer Mode */}
@@ -391,6 +414,13 @@ You can now ask questions about the contents, or explore it inside the Visual In
         selectedCitation={selectedCitation}
         isDrawerOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
+      />
+
+      {/* Settings Dialog Overlay */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        onResetSuccess={handleResetSuccess}
       />
     </main>
   );

@@ -27,7 +27,8 @@ export default function Sidebar({
   viewMode,
   onViewAll,
   isCollapsed: controlledIsCollapsed,
-  onToggleCollapse: controlledOnToggleCollapse
+  onToggleCollapse: controlledOnToggleCollapse,
+  onOpenSettings
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [localIsCollapsed, setLocalIsCollapsed] = useState(false);
@@ -80,7 +81,7 @@ export default function Sidebar({
       </div>
 
       {/* Bottom Profile Section */}
-      <AccountSection isCollapsed={isCollapsed} />
+      <AccountSection isCollapsed={isCollapsed} onOpenSettings={onOpenSettings} />
     </aside>
   );
 }
