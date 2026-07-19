@@ -96,63 +96,38 @@ def clear_ocr_cache_and_temps() -> int:
 
 def clear_vector_db() -> int:
     """
-    Resets the Chroma Vector DB: deletes collections, closes client references,
-    deletes the persistent SQLite DB files, and reinitializes the wrapper client and collection.
+    Resets the Chroma Vector DB by programmatically deleting and recreating the collection.
+    Avoids deleting SQLite files on disk to prevent file handle lock issues on Linux/Render.
     Returns the count of deleted vectors.
     """
-    logger.info("Deleting vector database...")
+    logger.info("Deleting vector database collection...")
     
-    # Get total vectors to return as count
     deleted_vectors = 0
     try:
+        # Get count if collection exists
         if chroma_wrapper.collection:
-            deleted_vectors = chroma_wrapper.collection.count()
+            try:
+                deleted_vectors = chroma_wrapper.collection.count()
+            except Exception as count_err:
+                logger.warning(f"Could not get vector count: {count_err}")
+            
             logger.info(f"Deleting collection 'document_chunks' with {deleted_vectors} vectors.")
             chroma_wrapper.client.delete_collection("document_chunks")
     except Exception as e:
         logger.warning(f"Could not delete collection programmatically: {e}")
 
-    # Nullify references to release sqlite connection locks
-    chroma_wrapper.collection = None
-    chroma_wrapper.client = None
-    rag_pipeline.collection = None
-    gc.collect()
-
-    # Attempt to clean the db directory on disk
-    vector_db_dir = config.VECTOR_DB_DIR
-    if os.path.exists(vector_db_dir):
-        for filename in os.listdir(vector_db_dir):
-            if filename == ".gitkeep":
-                continue
-            file_path = os.path.join(vector_db_dir, filename)
-            if is_path_safe_for_deletion(file_path):
-                try:
-                    if os.path.isdir(file_path):
-                        shutil.rmtree(file_path)
-                    else:
-                        os.remove(file_path)
-                    logger.info(f"Deleted vector DB persistent file: {filename}")
-                except Exception as e:
-                    # Windows might restrict file deletion due to active process handle locks.
-                    # We log it, but proceed as programmatically deleting the collection is already clean.
-                    logger.warning(f"Could not remove physical DB file {file_path}: {e}. Programmatic reset is still valid.")
-            else:
-                logger.warning(f"Skipped file {file_path} due to safety constraints.")
-
-    # Reinitialize ChromaDBWrapper and restore connection
+    # Recreate the collection to ensure it is immediately available
     try:
-        import chromadb
-        logger.info("Re-bootstrapping local persistent ChromaDB client...")
-        chroma_wrapper.client = chromadb.PersistentClient(path=config.VECTOR_DB_DIR)
+        logger.info("Re-creating ChromaDB collection...")
         chroma_wrapper.collection = chroma_wrapper.client.get_or_create_collection(
             name="document_chunks",
             metadata={"hnsw:space": "cosine"}
         )
-        # Update rag_pipeline reference
+        # Update rag_pipeline reference to ensure it points to the new collection
         rag_pipeline.collection = chroma_wrapper.collection
-        logger.info("ChromaDB vector collection successfully re-initialized.")
+        logger.info("ChromaDB vector collection successfully re-created and references updated.")
     except Exception as e:
-        logger.error(f"Failed to reinitialize ChromaDB client: {e}")
+        logger.error(f"Failed to re-create ChromaDB collection: {e}")
         raise e
         
     return deleted_vectors
