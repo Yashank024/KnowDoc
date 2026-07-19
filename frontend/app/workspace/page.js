@@ -33,6 +33,23 @@ export default function WorkspacePage() {
     }
   };
 
+  // Scoped scroll-lock for HTML/Body elements on workspace load to block virtual viewport scroll
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.height = "100%";
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100%";
+      
+      return () => {
+        document.documentElement.style.overflow = "";
+        document.documentElement.style.height = "";
+        document.body.style.overflow = "";
+        document.body.style.height = "";
+      };
+    }
+  }, []);
+
   // Fetch document list on component mount
   useEffect(() => {
     async function loadWorkspaceData() {
@@ -338,8 +355,8 @@ You can now ask questions about the contents, or explore it inside the Visual In
 
   return (
     <main
-      className="flex h-screen w-screen overflow-hidden"
-      style={{ backgroundColor: "var(--champagne-mist)" }}
+      className="flex w-screen overflow-hidden"
+      style={{ backgroundColor: "var(--champagne-mist)", height: "100dvh" }}
     >
       {/* Sidebar Backdrop Overlay on Mobile */}
       {!isSidebarCollapsed && (

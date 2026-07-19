@@ -90,6 +90,7 @@ KnowDoc is a production-ready **RAG (Retrieval-Augmented Generation)** document 
 | `/api/chats/{id}` | GET/PUT/DELETE | Get / rename / delete chat (wipes ChromaDB memory on delete) |
 | `/api/documents` | GET | List all indexed documents (validates physical file existence) |
 | `/api/documents/{id}` | GET/DELETE | Get / delete document (physically removes disk file + vectors) |
+| `/api/admin/reset-database` | POST | Administrative system reset — programmatically purges vector collections and wipes all local uploaded files, registry stores, and chat threads. |
 | `/api/health` | GET | Backend health check |
 
 ### Frontend
@@ -233,6 +234,9 @@ JINA_API_KEY=...
 | **Jina Embeddings Cloud** | High-quality `jina-embeddings-v4` without local model storage |
 | **PyMuPDF first** | Sub-millisecond text extraction for selectable PDFs — PaddleOCR only for scanned |
 | **HTTP 422 on failure** | Frontend receives exact stage name + reason if pipeline encounters error. |
+| **Zero-Downtime Database Resets** | Programmatically drops the ChromaDB document collection instead of attempting folder deletions. This prevents process locks and SQLite "readonly database" write errors on Render containers without container restarts. |
+| **Dynamic Viewport Locks & Scoped Scroll Anchors** | Locks root document scrollable offsets to `100dvh` and uses scoped element scrolling inside message lists. This blocks mobile browser visual viewport shifts when virtual keyboards trigger. |
+| **Mobile Catalog Viewport Refactoring** | Converts Explorer tag filters into dynamic horizontal chip sliders and unifies page-level layout scrolls, preventing layout overflows and separate viewport scroll shifts on phone resolutions. |
 
 ---
 

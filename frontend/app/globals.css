@@ -53,17 +53,17 @@ body {
     align-items: center;
     justify-content: center;
     position: fixed;
-    left: 20px;
-    top: 28px;
-    width: 44px;
-    height: 44px;
+    left: 14px;
+    top: 16px;
+    width: 40px;
+    height: 40px;
     background-color: var(--card-bg);
     color: var(--emerald-tide);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     cursor: pointer;
     box-shadow: 0 4px 16px rgba(15, 106, 91, 0.08);
-    z-index: 100;
+    z-index: 1001;
     transition: all 0.2s ease;
   }
   .mobile-sidebar-toggle:hover {

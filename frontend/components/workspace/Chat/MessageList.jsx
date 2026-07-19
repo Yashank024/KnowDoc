@@ -10,7 +10,7 @@ export default function MessageList({ messages, documents, onSelectCitation, scr
   }
 
   return (
-    <div className={styles.messageList}>
+    <div className={styles.messageList} ref={scrollRef}>
       {messages.map((msg, idx) => (
         <MessageBubble
           key={msg.id || idx}
@@ -19,7 +19,6 @@ export default function MessageList({ messages, documents, onSelectCitation, scr
           onSelectCitation={onSelectCitation}
         />
       ))}
-      <div ref={scrollRef} />
     </div>
   );
 }

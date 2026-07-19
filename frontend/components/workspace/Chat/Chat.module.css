@@ -4,11 +4,12 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   background-color: var(--champagne-mist);
   padding: 20px;
   position: relative;
   min-width: 0;
+  overflow: hidden;
 }
 
 /* ── Top Header Bar ── */
@@ -721,44 +722,97 @@
 }
 
 @media (max-width: 768px) {
+  /* ── Panel: full height, flex column, let inner content fill naturally ── */
   .panel {
-    padding: 12px !important;
-  }
-  
-  .topBar {
-    padding: 10px 14px !important;
-    padding-left: 60px !important; /* Shunt right to leave space for hamburger menu button */
-    gap: 8px !important;
-    border-radius: 12px !important;
-    margin-bottom: 12px !important;
-  }
-  
-  .topBarStatus {
-    display: none !important; /* Hide docs count to fit on small mobile screens */
-  }
-  
-  .emptyStateContainer {
-    padding: 24px 12px !important;
-    gap: 20px !important;
-  }
-  
-  .welcomeTitle {
-    font-size: 20px !important;
-  }
-  
-  .welcomeDesc {
-    font-size: 12px !important;
+    padding: 10px 10px 0 10px !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  /* Expand message bubble width to maximize screen estate */
+  /* ── Top header bar ── */
+  .topBar {
+    padding: 10px 14px !important;
+    padding-left: 58px !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+    margin-bottom: 10px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .topBarStatus {
+    display: none !important;
+  }
+
+  /* ── Empty state: fill remaining height, push content to bottom ── */
+  .emptyStateContainer {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 16px 4px !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    overflow-y: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* The logo/welcome panel — only visible if there's space */
+  .welcomePanel {
+    text-align: center !important;
+  }
+
+  .welcomeTitle {
+    font-size: 18px !important;
+  }
+
+  .welcomeDesc {
+    font-size: 12px !important;
+    display: none !important; /* Hide desc on mobile to save space */
+  }
+
+  /* Input wrapper sticks at the bottom of empty state */
+  .centeredInputWrapper {
+    width: 100% !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Suggestion cards */
+  .suggestionsGrid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  /* ── Active message view: messageList scrolls, input pinned at bottom ── */
+  .messageList {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding-right: 4px !important;
+    gap: 14px !important;
+    margin-bottom: 8px !important;
+    min-height: 0 !important;
+  }
+
+  /* Message bubbles */
   .bubbleWrapper {
     max-width: 92% !important;
   }
 
-  /* Compact input form styling for single-line fit on mobile */
+  /* inputWrapper for the bottom active chat mode */
+  .inputWrapper {
+    flex-shrink: 0 !important;
+    padding-bottom: env(safe-area-inset-bottom, 8px) !important;
+  }
+
+  /* Compact input form */
   .centerInputForm {
     padding: 10px 12px !important;
     border-radius: 16px !important;
+    gap: 8px !important;
   }
 
   .centerFooterRight {
@@ -766,8 +820,8 @@
   }
 
   .modelSelectorPill {
-    padding: 4px 6px !important;
-    font-size: 10px !important;
+    padding: 4px 8px !important;
+    font-size: 10.5px !important;
     gap: 4px !important;
   }
 
@@ -776,14 +830,21 @@
   }
 
   .centerPlusBtn {
-    width: 28px !important;
-    height: 28px !important;
+    width: 30px !important;
+    height: 30px !important;
   }
 
   .centerSendBtn {
-    width: 28px !important;
-    height: 28px !important;
+    width: 30px !important;
+    height: 30px !important;
     border-radius: 8px !important;
+  }
+
+  /* Input hint text below form */
+  .inputHint {
+    font-size: 10px !important;
+    text-align: center !important;
+    padding: 6px 0 8px !important;
   }
 }
 
@@ -793,8 +854,12 @@
     grid-template-columns: 1fr !important;
     gap: 8px !important;
   }
-  
+
   .suggestionCard {
     padding: 10px 12px !important;
+  }
+
+  .welcomeIcon {
+    display: none !important;
   }
 }
